@@ -31,15 +31,19 @@ class MainActivity : AppCompatActivity(), DataFromFragmentsToActivity {
 
     override fun onSubmitButtonClick() {
         var score = 0
-        for (i in answers.indices) {
+        val chosenAnswers = arrayListOf<String>()
+        for (i in rightAnswers.indices) {
             if (answers[i] == rightAnswers[i]) {
                 score += 1
             }
+            chosenAnswers.add(options[i][answers[i] - 1])
         }
         val result: Int = (100 / (rightAnswers.size.toFloat() / score.toFloat())).toInt()
         //Calculating right answers percent
         val intent = Intent(this, ResultActivity::class.java).apply {
             putExtra(EXTRA_RESULT, result)
+            putStringArrayListExtra(EXTRA_QUESTIONS, questions)
+            putStringArrayListExtra(EXTRA_ANSWERS, chosenAnswers)
         }
         startActivity(intent)
         //Open result activity
@@ -47,7 +51,7 @@ class MainActivity : AppCompatActivity(), DataFromFragmentsToActivity {
     }
 
     override fun onOptionSelected(questionNumber: Int, answer: Int) {
-        answers[questionNumber - 1] = answer
+        answers.add(questionNumber - 1, answer)
     }
 
     //getItem(-1) for previous
@@ -79,15 +83,18 @@ class MainActivity : AppCompatActivity(), DataFromFragmentsToActivity {
 
     companion object {
         const val EXTRA_RESULT = "com.rsschool.quiz.RESULT"
-        val questions: Array<String?> =
-            arrayOf(
+        const val EXTRA_QUESTIONS = "com.rsschool.quiz.QUESTIONS"
+        const val EXTRA_ANSWERS = "com.rsschool.quiz.ANSWERS"
+
+        val questions: ArrayList<String> =
+            arrayListOf(
                 "What can you benefit from using Kotlin for Android development?",
                 "What is the best programming language for everything?",
                 "What is something you can never seem to finish?",
                 "Pizza or tacos?",
                 "What's the worst movie?"
             )
-        val options: Array<Array<String?>?> = arrayOf(
+        val options: Array<Array<String>> = arrayOf(
             arrayOf(
                 "Nothing", "Something", "Maybe", "I don't know", "Money", "Headache"
             ),
@@ -110,9 +117,9 @@ class MainActivity : AppCompatActivity(), DataFromFragmentsToActivity {
         //val questions: Array<String?>? = null
         //val options: Array<Array<String?>?>? = null
 
-        val itemsCount = questions?.size?.let { options?.let { it1 -> min(it, it1.size) } }
+        val itemsCount = min(questions.size, options.size)
 
         @JvmStatic
-        private var answers = arrayOfNulls<Int>(itemsCount)
+        private var answers = arrayListOf(itemsCount)
     }
 }
