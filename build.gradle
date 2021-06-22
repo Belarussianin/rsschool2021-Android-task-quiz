@@ -1,3 +1,6 @@
+ext {
+    sourceCompatibility = kotlin_version
+}
 buildscript {
     ext.kotlin_version = "1.5.0"
     repositories {

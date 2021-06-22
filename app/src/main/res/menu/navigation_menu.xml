@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/result_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_pages_24"
+        android:title="result"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/exit_item"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        android:title="exit"
+        app:showAsAction="ifRoom" />
+</menu>

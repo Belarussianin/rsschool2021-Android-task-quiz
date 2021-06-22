@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Quiz</string>
+    <string name="result_text">Your result: %d %%</string>
+    <string name="quiz_toolbar_text">Question %d</string>
+    <string name="button_previous_text">Previous</string>
+    <string name="button_next_text">Next</string>
+    <string name="button_submit_text">Submit</string>
+    <string name="tab_number">%d</string>
+    <string name="exit_text">Exit</string>
+    <string name="back_text">Back</string>
+    <string name="result_toolbar_text">Result</string>
 </resources>
