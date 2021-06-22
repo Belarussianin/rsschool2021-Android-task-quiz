@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import com.rsschool.quiz.R
 import com.rsschool.quiz.databinding.FragmentQuizBinding
 import com.rsschool.quiz.interfaces.DataFromFragmentsToActivity
+import kotlinx.coroutines.android.awaitFrame
+import kotlinx.coroutines.awaitCancellation
 
 class QuizFragment : Fragment(R.layout.fragment_quiz) {
     private var _binding: FragmentQuizBinding? = null

@@ -3,12 +3,15 @@ package com.rsschool.quiz.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.Process
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.rsschool.quiz.adapters.QuizAdapter
 import com.rsschool.quiz.databinding.ActivityMainBinding
 import com.rsschool.quiz.interfaces.DataFromFragmentsToActivity
+import java.lang.IndexOutOfBoundsException
+import java.util.Arrays.copyOf
 import kotlin.math.min
 import kotlin.system.exitProcess
 
@@ -21,6 +24,7 @@ class MainActivity : AppCompatActivity(), DataFromFragmentsToActivity {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        answers.fill(-1)
 
         adapter = QuizAdapter(this)
         viewPager2 = binding.pager
@@ -30,6 +34,11 @@ class MainActivity : AppCompatActivity(), DataFromFragmentsToActivity {
     }
 
     override fun onSubmitButtonClick() {
+        if (answers.contains(-1)) {
+            viewPager2.currentItem = 0
+            Toast.makeText(applicationContext, "Not all questions answered", Toast.LENGTH_SHORT).show()
+            return
+        }
         var score = 0
         val chosenAnswers = arrayListOf<String>()
         for (i in rightAnswers.indices) {
@@ -51,7 +60,7 @@ class MainActivity : AppCompatActivity(), DataFromFragmentsToActivity {
     }
 
     override fun onOptionSelected(questionNumber: Int, answer: Int) {
-        answers.add(questionNumber - 1, answer)
+        answers[questionNumber - 1] = answer
     }
 
     //getItem(-1) for previous
@@ -119,7 +128,6 @@ class MainActivity : AppCompatActivity(), DataFromFragmentsToActivity {
 
         val itemsCount = min(questions.size, options.size)
 
-        @JvmStatic
-        private var answers = arrayListOf(itemsCount)
+        private val answers: Array<Int> = rightAnswers.clone().apply { fill(-1) }
     }
 }
