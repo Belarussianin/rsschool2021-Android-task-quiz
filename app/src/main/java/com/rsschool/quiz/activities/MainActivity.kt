@@ -41,13 +41,13 @@ class MainActivity : AppCompatActivity(), DataFromFragmentsToActivity {
             var score = 0
 
             //Calculating right answers percent
-            for (i in rightAnswersIndicies.indices) {
-                if (answers[i] == rightAnswersIndicies[i]) {
+            for (i in rightAnswersIndices.indices) {
+                if (answers[i] == rightAnswersIndices[i]) {
                     score += 1
                 }
                 chosenAnswers.add(options[i][answers[i]])
             }
-            val result: Int = (100 / (rightAnswersIndicies.size.toFloat() / score.toFloat())).toInt()
+            val result: Int = (100 / (rightAnswersIndices.size.toFloat() / score.toFloat())).toInt()
 
             //Start result activity, finish() this one
             startActivity(
@@ -108,10 +108,10 @@ class MainActivity : AppCompatActivity(), DataFromFragmentsToActivity {
                 "Titanic", "Tom&Jerry", "1917", "M.I.B.", "Harry Potter", "Terminator: Dark Fate"
             )
         )
-        val rightAnswersIndicies = arrayOf(1, 3, 1, 3, 5)
+        val rightAnswersIndices = arrayOf(1, 3, 1, 3, 5)
 
         val itemsCount = min(questions.size, options.size)
 
-        private val answers: Array<Int> = rightAnswersIndicies.clone().apply { fill(INVALID_VALUE) }
+        private val answers: Array<Int> = rightAnswersIndices.clone().apply { fill(INVALID_VALUE) }
     }
 }
