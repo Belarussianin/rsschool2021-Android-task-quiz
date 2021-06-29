@@ -90,7 +90,7 @@
                 app:layout_constraintStart_toStartOf="@id/margin_start_guideline"
                 app:layout_constraintTop_toTopOf="@id/margin_top_guideline"
                 tools:text="Question ?" />
-
+            
             <RadioGroup
                 android:id="@+id/radio_group"
                 android:layout_width="0dp"
